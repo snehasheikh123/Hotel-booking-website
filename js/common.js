@@ -41,6 +41,6 @@ var signup_success = function (event) {
 
 var on_error = function (event) {
     document.getElementById("loading").style.display = 'none';
-
+    console
     alert('Oops! Something went wrong.');
 };

@@ -12,18 +12,18 @@ require('C:/xampp/htdocs/PGLife/include/config.php');
 
 
 // Check if required fields are set
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fields = ['email', 'password', 'full_name', 'phone', 'college_name', 'gender'];
-    foreach ($fields as $field) {
-        if (!isset($_POST[$field])) {
-            echo json_encode(["success" => false, "message" => "Required fields are missing."]);
-            return;
-        }
-    }
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $fields = ['email', 'password', 'full_name', 'phone', 'college_name', 'gender'];
+//     foreach ($fields as $field) {
+//         if (!isset($_POST[$field])) {
+//             echo json_encode(["success" => false, "message" => "Required fields are missing."]);
+//             return;
+//         }
+//     }
+$full_name = $_POST['full_name'];   
+$phone = $_POST['phone'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $full_name = $_POST['full_name'];
-    $phone = $_POST['phone'];
     $college_name = $_POST['college_name'];
     $gender = $_POST['gender'];
 
@@ -52,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
-        $response = array("success" => false, "message" => "Something went wrong!");
+            $response = array("success" => false, "message" => "Something went wrong! ");
+
         echo json_encode($response);
         return;
     }
@@ -60,5 +61,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $response = array("success" => true, "message" => "Your account has been created successfully!");
     echo json_encode($response);
     mysqli_close($conn);
-}
+
 ?>
