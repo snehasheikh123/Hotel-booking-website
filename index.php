@@ -11,20 +11,24 @@ session_start();
 </head>
 <body>
     <?php include 'include/header.php'; ?>
-    <div id="loading">
-    </div>
+    <!-- <div id="loading">
+    </div> -->
     <div class="banner-container">
         <h2 class="white pb-3"> Happiness per square Foot</h2>
-            <form id="search-form" class="search-form" method="GET" action="property_list.php">
-             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search for PGs, Hostels, Flats, etc." aria-label="Search for PGs, Hostels, Flats, etc." aria-describedby="search-button">
-                <button type="submit" class="btn  btn-secondary">
-                 <i class="fa fa-search"></i>
-                </button>                   
-             </form>
-            </div>
 
+        <form id="search-form" class="search-form" method="GET" action="property_list.php">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search for PGs, Hostels, Flats, etc." aria-label="Search for PGs, Hostels, Flats, etc." aria-describedby="search-button">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div> 
+            </div>               
+        </form>
     </div>
+
+    
     <div class="page-container">
        <h1 class="city-heading">Popular Cities</h1>
        <div class="row">

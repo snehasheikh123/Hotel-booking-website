@@ -31,7 +31,7 @@ if (!$result_2) {
 }
 $interested_properties = mysqli_fetch_all($result_2, MYSQLI_ASSOC);
 ?>
- ?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,6 +167,8 @@ $interested_properties = mysqli_fetch_all($result_2, MYSQLI_ASSOC);
     }
     ?>
    
-<?php include 'include/footer.php'; ?>
+<?php include 'include/footer.php'?>
+<script type="text/javascript" src="js/dashboard.js"></script>
+
 </body>
 </html>
