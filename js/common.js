@@ -46,8 +46,6 @@ var signup_success = function (event) {
     document.getElementById("loading").style.display = 'none';
 
     var response = JSON.parse(event.target.responseText);
-    // console.log(response); // Yeh line response ko browser console mein print karegi
-
     if (response.success) {
         alert(response.message);
         window.location.href = "index.php";
@@ -55,7 +53,6 @@ var signup_success = function (event) {
         alert(response.message);
     }
 };
-
 
 var login_success = function (event) {
     document.getElementById("loading").style.display = 'none';
@@ -67,8 +64,9 @@ var login_success = function (event) {
         alert(response.message);
     }
 };
+
 var on_error = function (event) {
     document.getElementById("loading").style.display = 'none';
-    console
+
     alert('Oops! Something went wrong.');
 };

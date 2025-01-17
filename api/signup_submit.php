@@ -20,15 +20,14 @@ require('C:/xampp/htdocs/PGLife/include/config.php');
 //             return;
 //         }
 //     }
-$full_name = $_POST['full_name'];   
-$phone = $_POST['phone'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $college_name = $_POST['college_name'];
-    $gender = $_POST['gender'];
 
-    // Secure the password using password_hash
-    $password = password_hash($password, PASSWORD_DEFAULT);
+$full_name = isset($_POST['full_name']) ? $_POST['full_name'] : '';
+$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$college_name = isset($_POST['college_name']) ? $_POST['college_name'] : '';
+$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
+
 
     // Check if the email is already registered
     $sql = "SELECT * FROM users WHERE email = '$email'";
@@ -47,8 +46,8 @@ $phone = $_POST['phone'];
     }
 
     // Insert user data into the database
-    $sql = "INSERT INTO users (email, password, full_name, phone, college_name, gender) 
-            VALUES ('$email', '$password', '$full_name', '$phone', '$college_name', '$gender')";
+    $sql = 
+           "INSERT INTO users ( email, password, full_name, phone, college_name, gender) VALUES ('$email','$password','$full_name','$phone','$college_name','$gender')";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
