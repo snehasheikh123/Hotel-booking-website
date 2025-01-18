@@ -1,64 +1,37 @@
-<?php 
-require('C:/xampp/htdocs/PGLife/include/config.php');
+<?php
+require("../includes/database_connect.php");
 
-// Check if the required POST data is set
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     if (!isset($_POST['email']) || !isset($_POST['password']) || !isset($_POST['full_name']) || !isset($_POST['phone']) || !isset($_POST['college_name']) || !isset($_POST['gender'])) {
-//         $response = array("success" => false, "message" => "Required fields are missing.");
-//         echo json_encode($response);
-//         return;
-//     }
+$full_name = $_POST['full_name'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$password = sha1($password);
+$college_name = $_POST['college_name'];
+$gender = $_POST['gender'];
 
-
-
-// Check if required fields are set
-// if ($_SERVER["REQUEST_METHOD"] == "POST") {
-//     $fields = ['email', 'password', 'full_name', 'phone', 'college_name', 'gender'];
-//     foreach ($fields as $field) {
-//         if (!isset($_POST[$field])) {
-//             echo json_encode(["success" => false, "message" => "Required fields are missing."]);
-//             return;
-//         }
-//     }
-
-$full_name = isset($_POST['full_name']) ? $_POST['full_name'] : '';
-$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
-$college_name = isset($_POST['college_name']) ? $_POST['college_name'] : '';
-$gender = isset($_POST['gender']) ? $_POST['gender'] : '';
-
-
-    // Check if the email is already registered
-    $sql = "SELECT * FROM users WHERE email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    if (!$result) {
-        $response = array("success" => false, "message" => "Something went wrong!");
-        echo json_encode($response);
-        return;
-    }
-
-    $row_count = mysqli_num_rows($result);
-    if ($row_count != 0) {
-        $response = array("success" => false, "message" => "This email id is already registered with us!");
-        echo json_encode($response);
-        return;
-    }
-
-    // Insert user data into the database
-    $sql = 
-           "INSERT INTO users ( email, password, full_name, phone, college_name, gender) VALUES ('$email','$password','$full_name','$phone','$college_name','$gender')";
-    $result = mysqli_query($conn, $sql);
-
-    if (!$result) {
-            $response = array("success" => false, "message" => "Something went wrong! ");
-
-        echo json_encode($response);
-        return;
-    }
-
-    $response = array("success" => true, "message" => "Your account has been created successfully!");
+$sql = "SELECT * FROM users WHERE email='$email'";
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+    $response = array("success" => false, "message" => "Something went wrong!");
     echo json_encode($response);
-    mysqli_close($conn);
+    return;
+}
 
-?>
+$row_count = mysqli_num_rows($result);
+if ($row_count != 0) {
+    $response = array("success" => false, "message" => "This email id is already registered with us!");
+    echo json_encode($response);
+    return;
+}
+
+$sql = "INSERT INTO users (email, password, full_name, phone, gender, college_name) VALUES ('$email', '$password', '$full_name', '$phone', '$gender', '$college_name')";
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+    $response = array("success" => false, "message" => "Something went wrong!");
+    echo json_encode($response);
+    return;
+}
+
+$response = array("success" => true, "message" => "Your account has been created successfully!");
+echo json_encode($response);
+mysqli_close($conn);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('C:/xampp/htdocs/PGLife/include/config.php');
+require "includes/database_connect.php";
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL;
 $property_id = $_GET["property_id"];
@@ -51,37 +51,42 @@ if (!$result_4) {
 $interested_users = mysqli_fetch_all($result_4, MYSQLI_ASSOC);
 $interested_users_count = mysqli_num_rows($result_4);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= $property['property_name']; ?>  | PG Life</title>
-    <?php include 'include/header_link.php'; ?>
+    <title><?= $property['property_name']; ?> | PG Life</title>
+
+    <?php
+    include "includes/head_links.php";
+    ?>
     <link href="css/property_detail.css" rel="stylesheet" />
 </head>
 
 <body>
-  <?php include 'include/header.php'; ?>
-  
+    <?php
+    include "includes/header.php";
+    ?>
+
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-2">
             <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
             </li>
             <li class="breadcrumb-item">
                 <a href="property_list.php?city=<?= $property['city_name']; ?>"><?= $property['city_name']; ?></a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-            <?= $property['property_name']; ?>
-
+                <?= $property['property_name']; ?>
             </li>
         </ol>
     </nav>
 
     <div id="property-images" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-        <?php
+            <?php
             $property_images = glob("img/properties/" . $property['property_id'] . "/*");
             foreach ($property_images as $index => $property_image) {
             ?>
@@ -112,7 +117,7 @@ $interested_users_count = mysqli_num_rows($result_4);
     </div>
 
     <div class="property-summary page-container">
-    <div class="row no-gutters justify-content-between">
+        <div class="row no-gutters justify-content-between">
             <?php
             $total_rating = ($property['rating_clean'] + $property['rating_food'] + $property['rating_safety']) / 3;
             $total_rating = round($total_rating, 1);
@@ -409,10 +414,13 @@ $interested_users_count = mysqli_num_rows($result_4);
         ?>
     </div>
 
-    <?php include 'include/signup_modal.php'; ?>
-  <?php include 'include/login_modal.php'; ?>
-  <?php include 'include/footer.php'; ?>
-  <script type="text/javascript" src="js/property_detail.js"></script>
+    <?php
+    include "includes/signup_modal.php";
+    include "includes/login_modal.php";
+    include "includes/footer.php";
+    ?>
+
+    <script type="text/javascript" src="js/property_detail.js"></script>
 </body>
 
 </html>

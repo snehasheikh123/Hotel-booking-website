@@ -1,7 +1,7 @@
 <?php
 session_start();
-require('C:/xampp/htdocs/PGLife/include/config.php');
 
+require "../includes/database_connect.php";
 
 if (!isset($_SESSION['user_id'])) {
     echo json_encode(array("success" => false, "is_logged_in" => false));

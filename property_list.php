@@ -1,7 +1,6 @@
 <?php
 session_start();
-require('C:/xampp/htdocs/PGLife/include/config.php');
-
+require "includes/database_connect.php";
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : NULL;
 $city_name = $_GET["city"];
@@ -49,14 +48,14 @@ $interested_users_properties = mysqli_fetch_all($result_3, MYSQLI_ASSOC);
     <title>Best PG's in <?php echo $city_name ?> | PG Life</title>
 
     <?php
-    include "include/header_link.php";
+    include "includes/head_links.php";
     ?>
     <link href="css/property_list.css" rel="stylesheet" />
 </head>
 
 <body>
     <?php
-    include "include/header.php";
+    include "includes/header.php";
     ?>
 
     <nav aria-label="breadcrumb">
@@ -231,9 +230,9 @@ $interested_users_properties = mysqli_fetch_all($result_3, MYSQLI_ASSOC);
     </div>
 
     <?php
-    include "include/signup_modal.php";
-    include "include/login_modal.php";
-    include "include/footer.php";
+    include "includes/signup_modal.php";
+    include "includes/login_modal.php";
+    include "includes/footer.php";
     ?>
 
     <script type="text/javascript" src="js/property_list.js"></script>
